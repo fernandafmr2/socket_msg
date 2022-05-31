@@ -29,7 +29,7 @@ int main(void)
 	err = bind(sockfd, (struct sockaddr*) &serveraddr, sizeof(serveraddr));
 	if (err < 0) {
 		err = errno;
-		perror("connect");
+		perror("bind");
 		close(sockfd);
 		return err;
 	}
@@ -56,17 +56,17 @@ read_:
 	if (ret < 0) {
 		perror("read");
 		close(sockfd);
+		close(new_sock);
 		return ret;
 	}
 
 	if (ret == 0) {
 		close(sockfd);
+		close(new_sock);
 		return 0;
 	}
 
 	recv[ret] = '\0';
 	printf("%s", recv);
 	goto read_;
-
-	return 0;
 }
