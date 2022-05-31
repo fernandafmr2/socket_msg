@@ -43,7 +43,8 @@ int main(void)
 	}
 
 	socklen_t serveradrr_size = sizeof(serveraddr);
-	new_sock = accept(sockfd, (struct sockaddr *) &serveraddr, &serveradrr_size);
+	new_sock = accept(sockfd, (struct sockaddr *) &serveraddr, 
+		          &serveradrr_size);
 	if (new_sock < 0) {
 		err = errno;
 		perror("accept");
