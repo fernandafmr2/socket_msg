@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	sendline = argv[1];
 	sendbytes = strlen(argv[1]);
 
-	write_:
+write_:
 	ret = send(sockfd, sendline, sendbytes, 0);
 	if (ret <= 0) {
 		if (ret == 0) {
