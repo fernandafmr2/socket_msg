@@ -23,17 +23,13 @@ int main(void)
 	}
 
 	memset(&serveraddr, 0, sizeof(serveraddr));
-<<<<<<< HEAD
-	serveraddr.sin_family		= AF_INET;
-=======
 	serveraddr.sin_family	= AF_INET;
->>>>>>> 1942870 (v3)
 	serveraddr.sin_port		= htons(8080);
 
 	err = bind(sockfd, (struct sockaddr*) &serveraddr, sizeof(serveraddr));
 	if (err < 0) {
 		err = errno;
-		perror("bind");
+		perror("connect");
 		close(sockfd);
 		return err;
 	}
@@ -68,16 +64,10 @@ read_:
 	if (ret == 0) {
 		close(new_sock);
 		close(sockfd);
-		close(new_sock);
 		return 0;
 	}
 
 	recv[ret] = '\0';
 	printf("%s", recv);
-<<<<<<< HEAD
-	goto read_;
-}
-=======
 	goto read_;2
 }
->>>>>>> 1942870 (v3)

@@ -44,25 +44,6 @@ int main(int argc, char **argv)
 	sendline = argv[1];
 	sendbytes = strlen(argv[1]);
 
-<<<<<<< HEAD
-write_:
-    ret = send(sockfd, sendline, sendbytes, 0);
-    if (ret <= 0) {
-        if (ret == 0) {
-            puts("server error while send data");
-            close(sockfd);
-            return ENETDOWN;
-        }
-
-        err = errno;
-        if (err == EINTR)
-            goto write_; 
-        
-        perror("send");
-        close(sockfd);
-        return err;
-    }
-=======
 	write_:
 	ret = send(sockfd, sendline, sendbytes, 0);
 	if (ret <= 0) {
@@ -75,7 +56,6 @@ write_:
 		err = errno;
 		if (err == EINTR)
 			goto write_; 
->>>>>>> 1942870 (v3)
 
 		perror("send");
 		close(sockfd);
@@ -90,12 +70,7 @@ write_:
 
 	printf("send message to server");
 
-<<<<<<< HEAD
-    return 0;
-}
-=======
 	close(sockfd);
 
 	return 0;
 }
->>>>>>> 1942870 (v3)
