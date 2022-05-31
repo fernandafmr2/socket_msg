@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	serveraddr.sin_port     = htons(8080);
 
 	err = connect(sockfd, (struct sockaddr *) &serveraddr,
-	sizeof(serveraddr));
+		      sizeof(serveraddr));
 	if (err < 0) {
 		err = errno;
 		perror("connect");
