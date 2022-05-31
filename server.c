@@ -66,7 +66,7 @@ read_:
 
 	recv[ret] = '\0';
 	printf("%s", recv);
-	goto read_;2
+	goto read_;
 
 	return 0;
 }
