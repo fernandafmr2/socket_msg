@@ -1,14 +1,14 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<errno.h>
-#include<stdarg.h>
-#include<arpa/inet.h>
-#include<unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 #define BUFF 1024
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     int             sockfd, err;
     ssize_t         ret;
@@ -47,14 +47,14 @@ int main (int argc, char **argv)
 write_:
     ret = send(sockfd, sendline, sendbytes, 0);
     if (ret <= 0) {
-        if( ret == 0) {
+        if (ret == 0) {
             puts("server error while send data");
             close(sockfd);
             return ENETDOWN;
         }
 
         err = errno;
-        if(err == EINTR)
+        if (err == EINTR)
             goto write_; 
         
         perror("send");
