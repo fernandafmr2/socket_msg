@@ -1,14 +1,14 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<errno.h>
-#include<stdarg.h>
-#include<arpa/inet.h>
-#include<unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 #define BUFF 1024
 
-int main ()
+int main(void)
 {
 	int sockfd, new_sock, err;
 	ssize_t ret;
@@ -23,8 +23,8 @@ int main ()
 	}
 
 	memset(&serveraddr, 0, sizeof(serveraddr));
-	serveraddr.sin_family	= AF_INET;
-	serveraddr.sin_port		= htons(8080);
+	serveraddr.sin_family		= AF_INET;
+	serveraddr.sin_port			= htons(8080);
 
 	err = bind(sockfd, (struct sockaddr*) &serveraddr, sizeof(serveraddr));
 	if (err < 0) {
@@ -66,12 +66,7 @@ read_:
 
 	recv[ret] = '\0';
 	printf("%s", recv);
-	goto read_;
-
-	printf("%s", recv);
-
-	close(sockfd);
-	shutdown(sockfd, SHUT_RDWR);
+	goto read_;2
 
 	return 0;
 }

@@ -10,8 +10,11 @@
 
 int main (int argc, char **argv)
 {
-    int sockfd, err;
-    struct sockaddr_in  serveraddr;
+    int             sockfd, err;
+    ssize_t         ret;
+    size_t          sendbytes;
+    const char*     sendline;
+    struct          sockaddr_in  serveraddr;
 
     if (argc != 2) {
         err = errno;
@@ -34,19 +37,40 @@ int main (int argc, char **argv)
     if (err < 0) {
         err = errno;
         perror("connect");
+        close(sockfd);
         return err;
     }
 
-    err = send(sockfd, argv[1], strlen(argv[1]), 0);
-    if (err < 0) {
+    sendline = argv[1];
+    sendbytes = strlen(argv[1]);
+
+write_:
+    ret = send(sockfd, sendline, sendbytes, 0);
+    if (ret <= 0) {
+        if( ret == 0) {
+            puts("server error while send data");
+            close(sockfd);
+            return ENETDOWN;
+        }
+
         err = errno;
+        if(err == EINTR)
+            goto write_; 
+        
         perror("send");
+        close(sockfd);
         return err;
     }
+
+    sendbytes -= (size_t)ret;
+    if (sendbytes > 0) {
+        sendline += (size_t)ret;
+        goto write_;
+    }
+
     printf("send message to server");
 
     close(sockfd);
-    shutdown(sockfd, SHUT_RDWR);
 
     return 0;
 }
